@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     // Handles GET requests sent to /exercise01/hello
-    @GetMapping("/exercises01/hello")
+    @GetMapping("/exercise01/hello")
     public String hello() {
-        return "Hell, Spring Booty";
+        return "Hell, Spring Booty with devTools";
     }    
 }
