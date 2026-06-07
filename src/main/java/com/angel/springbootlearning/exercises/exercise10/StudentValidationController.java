@@ -57,3 +57,21 @@ public class StudentValidationController {
     // Defines the error response model
     public record ErrorResponse(String message) {}
 }
+/*
+
+Invoke-RestMethod `
+  -Uri "http://localhost:8080/exercise10/students" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body '{"name":"Angel","role":"backend"}'
+  
+  **************************************************************************
+
+  Invoke-RestMethod `
+  -Uri "http://localhost:8080/exercise10/students" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body '{"name":"","role":"backend"}'
+  
+  
+  */
