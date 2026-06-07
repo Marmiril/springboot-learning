@@ -29,8 +29,8 @@ public class StudentFilterController {
                 new StudentResponse(1, "Angel", "backend"),
                 new StudentResponse(2, "Angello", "frontend"),
                 new StudentResponse(3, "Angie", "fullstack"),
-                new StudentResponse(3, "Angie2", "fullstack"),
-                new StudentResponse(4, "Angellotti", "love student"));
+                new StudentResponse(4, "Angie2", "fullstack"),
+                new StudentResponse(5, "Angellotti", "love student"));
 
         if (role == null || role.isBlank()) {
             return students;
