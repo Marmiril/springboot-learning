@@ -302,26 +302,110 @@ Done
 
 ## Exercise 11 - Reusable validation with private methods
 
-**Purpose:**  
-This exercise improves the previous manual validation by moving the validation logic into private methods.
+**Purpose:**
+This exercise improves the previous manual validation by moving repeated validation logic into private helper methods.
 
-**URL:**  
+**URL:**
 http://localhost:8080/exercise11/students
 
-**HTTP method:**  
+**HTTP method:**
 POST
 
 **Main concepts:**
 
-- Manual validation
-- Private helper methods
-- `ResponseEntity`
-- HTTP 201 Created
-- HTTP 400 Bad Request
-- Cleaner controller logic
+* Manual validation
+* Private helper methods
+* `ResponseEntity<?>`
+* `HttpStatus.CREATED`
+* `HttpStatus.BAD_REQUEST`
+* Custom error response
+* Cleaner controller logic
+* Reading `400 Bad Request` responses in PowerShell
 
-**File:**  
+**File:**
 `src/main/java/com/angel/springbootlearning/exercises/exercise11/StudentReusableValidationController.java`
 
-**Status:**  
-In progress
+**PowerShell valid request:**
+
+```powershell
+$body = @{
+    name = "Angel"
+    role = "backend"
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Uri "http://localhost:8080/exercise11/students" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body $body
+```
+
+**PowerShell invalid request:**
+
+```powershell
+$body = @{
+    name = ""
+    role = "backend"
+} | ConvertTo-Json
+
+try {
+    Invoke-WebRequest `
+      -Uri "http://localhost:8080/exercise11/students" `
+      -Method Post `
+      -ContentType "application/json" `
+      -Body $body
+}
+catch {
+    $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
+    $reader.ReadToEnd()
+}
+```
+
+**Expected error response:**
+
+```json
+{
+  "message": "The student name is required!"
+}
+```
+
+**Status:**
+Done
+
+## Exercise 12 - Validation of several fields
+
+**Purpose:**
+This exercise extends manual validation by checking several fields before creating a response: name, role, age and email.
+
+**URL:**
+http://localhost:8080/exercise12/students
+
+**HTTP method:**
+POST
+
+**Main concepts:**
+
+* Manual validation
+* Validation of several fields
+* Private helper methods
+* `ResponseEntity<?>`
+* `HttpStatus.CREATED`
+* `HttpStatus.BAD_REQUEST`
+* Custom error response
+* Basic email validation
+* Numeric range validation
+* Cleaner controller logic
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise12/StudentSeveralFieldsValidationController.java`
+
+**Tested cases:**
+
+* Valid request returns HTTP 201 Created.
+* Empty name returns HTTP 400 Bad Request.
+* Empty role returns HTTP 400 Bad Request.
+* Invalid age returns HTTP 400 Bad Request.
+* Invalid email returns HTTP 400 Bad Request.
+
+**Status:**
+Done
