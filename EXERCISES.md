@@ -409,3 +409,196 @@ POST
 
 **Status:**
 Done
+
+## Exercise 13 - Structured error responses
+
+**Purpose:**
+This exercise improves error handling by returning a more structured error response. Instead of returning only a message, the API returns the HTTP status code, the HTTP error name and a custom validation message.
+
+**URL:**
+http://localhost:8080/exercise13/students
+
+**HTTP method:**
+POST
+
+**Main concepts:**
+
+* Manual validation
+* Structured error response
+* `ResponseEntity<?>`
+* `HttpStatus.BAD_REQUEST`
+* `status.value()`
+* `status.getReasonPhrase()`
+* Custom `ErrorResponse`
+* Basic regex validation for email
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise13/StudentStructuredErrorController.java`
+
+**Status:**
+Done
+
+---
+
+## Exercise 14 - HTTP 404 Not Found
+
+**Purpose:**
+This exercise introduces how to return an HTTP 404 Not Found response when a requested resource does not exist.
+
+**URL:**
+http://localhost:8080/exercise14/students/{id}
+
+**HTTP method:**
+GET
+
+**Main concepts:**
+
+* `@GetMapping`
+* `@PathVariable`
+* `ResponseEntity<?>`
+* HTTP 200 OK
+* HTTP 404 Not Found
+* Simulated resource lookup
+* Structured error response
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise14/StudentNotFoundController.java`
+
+**Status:**
+Done
+
+---
+
+## Exercise 15 - HTTP 204 No Content
+
+**Purpose:**
+This exercise introduces how to return an HTTP 204 No Content response when an operation is completed successfully but does not need to return a response body.
+
+**URL:**
+http://localhost:8080/exercise15/students/{id}
+
+**HTTP method:**
+DELETE
+
+**Main concepts:**
+
+* `@DeleteMapping`
+* `@PathVariable`
+* `ResponseEntity<?>`
+* HTTP 204 No Content
+* HTTP 404 Not Found
+* Simulated delete operation
+* Response without body
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise15/StudentNoContentController.java`
+
+**Status:**
+Done
+
+---
+
+## Exercise 16 - HTTP 409 Conflict
+
+**Purpose:**
+This exercise introduces how to return an HTTP 409 Conflict response when the request is valid but conflicts with existing data.
+
+**URL:**
+http://localhost:8080/exercise16/students
+
+**HTTP method:**
+POST
+
+**Main concepts:**
+
+* `@PostMapping`
+* `@RequestBody`
+* `ResponseEntity<?>`
+* HTTP 201 Created
+* HTTP 400 Bad Request
+* HTTP 409 Conflict
+* Duplicate value validation
+* Simulated existing data
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise16/StudentConflictController.java`
+
+**Status:**
+Done
+
+---
+
+## Exercise 17 - HTTP 422 Unprocessable Content
+
+**Purpose:**
+This exercise introduces how to return an HTTP 422 response when the received JSON is valid but does not follow a business rule.
+
+**URL:**
+http://localhost:8080/exercise17/students
+
+**HTTP method:**
+POST
+
+**Main concepts:**
+
+* `@PostMapping`
+* `@RequestBody`
+* Manual validation
+* Business rule validation
+* `HttpStatus.UNPROCESSABLE_CONTENT`
+* HTTP 422 Unprocessable Content
+* Allowed values validation
+* Structured error response
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise17/StudentUnprocessableEntityController.java`
+
+**Status:**
+Done
+
+---
+
+## Exercise 18 - Common HTTP status codes
+
+**Purpose:**
+This exercise consolidates several common HTTP status codes used in REST APIs in a single controller.
+
+**URL:**
+http://localhost:8080/exercise18/students
+
+**HTTP methods:**
+GET, POST, DELETE
+
+**Main concepts:**
+
+* `ResponseEntity`
+* HTTP 200 OK
+* HTTP 201 Created
+* HTTP 204 No Content
+* HTTP 400 Bad Request
+* HTTP 404 Not Found
+* HTTP 409 Conflict
+* `@GetMapping`
+* `@PostMapping`
+* `@DeleteMapping`
+* `@PathVariable`
+* `@RequestBody`
+* Structured error responses
+* Simulated student data
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise18/StudentHttpStatusController.java`
+
+**Tested cases:**
+
+* GET all students returns HTTP 200 OK.
+* GET existing student by id returns HTTP 200 OK.
+* GET missing student by id returns HTTP 404 Not Found.
+* POST valid student returns HTTP 201 Created.
+* POST empty required field returns HTTP 400 Bad Request.
+* POST duplicated student name returns HTTP 409 Conflict.
+* DELETE existing student returns HTTP 204 No Content.
+* DELETE missing student returns HTTP 404 Not Found.
+
+**Status:**
+Done
