@@ -142,3 +142,16 @@ Invoke-RestMethod `
   -ContentType "application/json" `
   -Body $body
 */
+
+/*$body = @{
+    name = "Angel"
+    role = "frontend"
+    portfolioUrl = "https://portfolio.example.com"
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Uri "http://localhost:8080/exercise19/students" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body $body
+*/

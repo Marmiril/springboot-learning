@@ -602,3 +602,82 @@ GET, POST, DELETE
 
 **Status:**
 Done
+
+## Exercise 19 - Conditional validation
+
+**Purpose:**
+This exercise introduces conditional validation. Some fields are required only when another field has a specific value.
+
+**URL:**
+http://localhost:8080/exercise19/students
+
+**HTTP method:**
+POST
+
+**Main concepts:**
+
+* Manual validation
+* Conditional validation
+* Business rule validation
+* `ResponseEntity<?>`
+* `HttpStatus.BAD_REQUEST`
+* `HttpStatus.UNPROCESSABLE_CONTENT`
+* HTTP 422 Unprocessable Content
+* Private helper methods
+* Structured error response
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise19/StudentConditionalValidationController.java`
+
+**Tested cases:**
+
+* Backend student without portfolio URL returns HTTP 201 Created.
+* Frontend student without portfolio URL returns HTTP 422 Unprocessable Content.
+* Fullstack student without portfolio URL returns HTTP 422 Unprocessable Content.
+* Frontend student with portfolio URL returns HTTP 201 Created.
+* Empty name returns HTTP 400 Bad Request.
+* Empty role returns HTTP 400 Bad Request.
+* Invalid role returns HTTP 422 Unprocessable Content.
+
+**Status:**
+Done
+
+---
+
+## Exercise 20 - Refactor responses
+
+**Purpose:**
+This exercise refactors response creation by using private helper methods for both successful and error responses.
+
+**URL:**
+http://localhost:8080/exercise20/students
+
+**HTTP method:**
+POST
+
+**Main concepts:**
+
+* Response refactoring
+* Private helper methods
+* `ResponseEntity<?>`
+* `ResponseEntity<StudentResponse>`
+* `ResponseEntity<ErrorResponse>`
+* `HttpStatus.CREATED`
+* `HttpStatus.BAD_REQUEST`
+* `HttpStatus.UNPROCESSABLE_CONTENT`
+* Reusable success response
+* Reusable error response
+* Cleaner controller logic
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise20/StudentResponseRefactorController.java`
+
+**Tested cases:**
+
+* Valid request returns HTTP 201 Created.
+* Empty name returns HTTP 400 Bad Request.
+* Empty role returns HTTP 400 Bad Request.
+* Invalid role returns HTTP 422 Unprocessable Content.
+
+**Status:**
+Done
