@@ -681,3 +681,275 @@ POST
 
 **Status:**
 Done
+
+## Exercise 21 - Mutable in-memory list
+
+**Purpose:**
+This exercise introduces an `ArrayList` as temporary mutable storage. The stored students remain available only while the application is running.
+
+**URL:**
+http://localhost:8080/exercise21/students
+
+**HTTP method:**
+GET
+
+**Main concepts:**
+
+* `ArrayList`
+* `List`
+* Mutable in-memory storage
+* `@RequestMapping`
+* `@GetMapping`
+* JSON array response
+* Temporary data storage
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise21/StudentListController.java`
+
+**PowerShell request:**
+
+```powershell
+curl.exe -s "http://localhost:8080/exercise21/students"
+```
+
+**Expected response:**
+
+```json
+[
+  "Ángel",
+  "Kratos"
+]
+```
+
+**Tested cases:**
+
+* GET request returns HTTP 200 OK.
+* The endpoint returns every student stored in the `ArrayList`.
+* The stored data disappears when the application is restarted.
+
+**Status:**
+Done
+
+---
+
+## Exercise 22 - Create a student
+
+**Purpose:**
+This exercise receives a student as JSON through a POST request and stores the received object temporarily in an `ArrayList`.
+
+**URL:**
+http://localhost:8080/exercise22/students
+
+**HTTP method:**
+POST
+
+**Main concepts:**
+
+* `ArrayList`
+* `@PostMapping`
+* `@RequestBody`
+* JSON request body
+* Java record as data model
+* `ResponseEntity`
+* `HttpStatus.CREATED`
+* HTTP 201 Created
+* Temporary in-memory storage
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise22/StudentCreateController.java`
+
+**PowerShell request:**
+
+```powershell
+$body = @{
+    id   = 1
+    name = "Angel"
+    role = "Backend developer"
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+    -Uri "http://localhost:8080/exercise22/students" `
+    -Method Post `
+    -ContentType "application/json" `
+    -Body $body
+```
+
+**Expected response:**
+
+```text
+id name  role
+-- ----  ----
+ 1 Angel Backend developer
+```
+
+**Tested cases:**
+
+* A valid JSON request returns HTTP 201 Created.
+* The received student is added to the in-memory list.
+* The created student is returned in the response body.
+
+**Status:**
+Done
+
+---
+
+## Exercise 23 - List stored students
+
+**Purpose:**
+This exercise stores students temporarily in an `ArrayList` and returns all stored students through a GET request.
+
+**URL:**
+http://localhost:8080/exercise23/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* `ArrayList`
+* Mutable in-memory storage
+* `@PostMapping`
+* `@GetMapping`
+* `@RequestBody`
+* `ResponseEntity`
+* HTTP 201 Created
+* JSON list response
+* Creating and listing resources
+* Multiple PowerShell requests with `ForEach-Object`
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise23/Exercise23StudentListController.java`
+
+**PowerShell create requests:**
+
+```powershell
+$students = @(
+    @{
+        id   = 1
+        name = "Angel"
+        role = "Backend developer"
+    },
+    @{
+        id   = 2
+        name = "Kratos"
+        role = "God of War"
+    }
+)
+
+$students | ForEach-Object {
+    Invoke-RestMethod `
+        -Uri "http://localhost:8080/exercise23/students" `
+        -Method Post `
+        -ContentType "application/json" `
+        -Body ($_ | ConvertTo-Json)
+}
+```
+
+**PowerShell list request:**
+
+```powershell
+curl.exe -s "http://localhost:8080/exercise23/students"
+```
+
+**Expected response:**
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Angel",
+    "role": "Backend developer"
+  },
+  {
+    "id": 2,
+    "name": "Kratos",
+    "role": "God of War"
+  }
+]
+```
+
+**Tested cases:**
+
+* POST request stores a student and returns HTTP 201 Created.
+* Several students can be created using several POST requests.
+* GET request returns HTTP 200 OK.
+* GET request returns every student currently stored in memory.
+* A Spring bean name conflict was resolved by giving the controller a unique class name.
+
+**Status:**
+Done
+
+---
+
+## Exercise 24 - Find a student by id
+
+**Purpose:**
+This exercise searches for a specific student inside an in-memory `ArrayList` using the id received as a path variable.
+
+**URL:**
+http://localhost:8080/exercise24/students/{id}
+
+**HTTP method:**
+GET
+
+**Main concepts:**
+
+* `ArrayList`
+* `@GetMapping`
+* `@PathVariable`
+* Dynamic resource lookup
+* Iterating through a list
+* Comparing resource identifiers
+* `ResponseEntity`
+* HTTP 200 OK
+* HTTP 404 Not Found
+* Response without body
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise24/StudentSearchController.java`
+
+**PowerShell successful request:**
+
+```powershell
+Invoke-RestMethod `
+    -Uri "http://localhost:8080/exercise24/students/2" `
+    -Method Get
+```
+
+**Expected response:**
+
+```text
+id name   role
+-- ----   ----
+ 2 Kratos God of War
+```
+
+**PowerShell missing student request:**
+
+```powershell
+try {
+    Invoke-WebRequest `
+        -Uri "http://localhost:8080/exercise24/students/99" `
+        -Method Get `
+        -UseBasicParsing
+}
+catch {
+    $_.Exception.Response.StatusCode.value__
+}
+```
+
+**Expected error status:**
+
+```text
+404
+```
+
+**Tested cases:**
+
+* Existing student id returns HTTP 200 OK.
+* Existing student id returns the matching student as JSON.
+* Missing student id returns HTTP 404 Not Found.
+* The search iterates through the in-memory list until a matching id is found.
+
+**Status:**
+Done

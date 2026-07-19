@@ -38,3 +38,6 @@ public class StudentListContoller {
         return students;
     }
 }
+ /*
+ curl.exe -s "http://localhost:8080/exercise21/students"
+ */
