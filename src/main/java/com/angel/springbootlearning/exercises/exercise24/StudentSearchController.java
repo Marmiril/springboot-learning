@@ -58,3 +58,22 @@ public class StudentSearchController {
 
     public record Student(int id, String name, String role) {}
 }
+
+/*
+Invoke-RestMethod `
+    -Uri "http://localhost:8080/exercise24/students/2" `
+    -Method Get
+*/
+
+
+/*
+try {
+    Invoke-WebRequest `
+        -Uri "http://localhost:8080/exercise24/students/99" `
+        -Method Get `
+        -UseBasicParsing
+}
+catch {
+    $_.Exception.Response.StatusCode.value__
+}
+*/

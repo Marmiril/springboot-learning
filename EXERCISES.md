@@ -953,3 +953,77 @@ catch {
 
 **Status:**
 Done
+
+## Exercise 25 - Delete a student by id
+
+**Purpose:**
+This exercise introduces how to delete a student from an in-memory `ArrayList` using an id received through the URL.
+
+**URL:**
+http://localhost:8080/exercise25/students/{id}
+
+**HTTP method:**
+DELETE
+
+**Main concepts:**
+
+* `@DeleteMapping`
+* `@PathVariable`
+* `ArrayList`
+* `removeIf()`
+* `ResponseEntity<Void>`
+* HTTP 204 No Content
+* HTTP 404 Not Found
+* Resource deletion
+* In-memory data management
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise25/StudentDeleteController.java`
+
+**PowerShell successful request:**
+
+```powershell
+$response = Invoke-WebRequest `
+    -Uri "http://localhost:8080/exercise25/students/1" `
+    -Method Delete `
+    -UseBasicParsing
+
+$response.StatusCode
+```
+
+**Expected status:**
+
+```text
+204
+```
+
+**PowerShell missing student request:**
+
+```powershell
+try {
+    Invoke-WebRequest `
+        -Uri "http://localhost:8080/exercise25/students/99" `
+        -Method Delete `
+        -UseBasicParsing
+}
+catch {
+    $_.Exception.Response.StatusCode.value__
+}
+```
+
+**Expected error status:**
+
+```text
+404
+```
+
+**Tested cases:**
+
+* Existing student id returns HTTP 204 No Content.
+* The matching student is removed from the in-memory list.
+* Missing student id returns HTTP 404 Not Found.
+* Repeating the deletion of the same student returns HTTP 404 Not Found.
+* The deleted student is restored when the application is restarted because the sample data is created in the controller constructor.
+
+**Status:**
+Done
