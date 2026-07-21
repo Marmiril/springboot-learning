@@ -1354,3 +1354,53 @@ GET, POST
 
 **Status:**
 Done
+
+## Exercise 30 - Complete student CRUD
+
+**Purpose:**
+This exercise integrates all CRUD operations into a single in-memory student controller.
+
+**URL:**
+http://localhost:8080/exercise30/students
+
+**HTTP methods:**
+GET, POST, PUT, PATCH, DELETE
+
+**Main concepts:**
+
+* Complete CRUD
+* Automatic id generation
+* Duplicate prevention
+* Manual validation
+* `@GetMapping`
+* `@PostMapping`
+* `@PutMapping`
+* `@PatchMapping`
+* `@DeleteMapping`
+* `List.get()`
+* `List.add()`
+* `List.set()`
+* `List.remove()`
+* Private helper methods
+* HTTP 200, 201, 204, 400, 404 and 409
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise30/StudentCrudController.java`
+
+**Request file:**
+`requests/exercise30.http`
+
+**Tested cases:**
+
+* POST creates students with automatic ids.
+* Duplicate names return HTTP 409 Conflict.
+* GET returns all students.
+* GET by id returns one student or HTTP 404.
+* PUT replaces all student data.
+* PATCH updates only the received fields.
+* DELETE removes a student and returns HTTP 204.
+* Invalid POST or PUT data returns HTTP 400.
+* Missing resources return HTTP 404.
+
+**Status:**
+Done

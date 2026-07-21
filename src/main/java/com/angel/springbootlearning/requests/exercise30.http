@@ -1,0 +1,69 @@
+@baseUrl = http://localhost:8080/exercise30/students
+
+### Create the first student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Angel",
+    "role":"Java Developer"
+}
+
+### Create the second student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Kratos",
+    "role":"God of War"
+}
+
+### Try to create a duplicate student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"angel",
+    "role":"Backend developer"
+}
+
+### List all students
+GET {{baseUrl}}
+
+### Find a student
+GET {{baseUrl}}/1
+
+### Find a missing student
+GET {{baseUrl}}/99
+
+### Replace student
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "name":"Son Goku",
+    "role":"Saiyjin"
+}
+
+### Partially update only the role
+PATCH {{baseUrl}}/1
+Content-Type: application/json
+
+{ 
+    "role":"Java backend developer"
+}
+
+
+### Partially update only the name
+PATCH {{baseUrl}}/2
+Content-Type: application/json
+
+{
+    "name":"Ghost of Sparta"
+}
+
+### Delete student
+DELETE {{baseUrl}}/2
+
+### Try to delete missing student
+DELETE {{baseUrl}}/99
