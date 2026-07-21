@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController 
-@RequestMapping("/exercise26/students/{id}")
+@RequestMapping("/exercise26/students")
 public class StudentFullUpdateController {
 
     private final List<Student> students = new ArrayList<>();

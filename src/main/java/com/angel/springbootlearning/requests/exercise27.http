@@ -1,0 +1,39 @@
+### 1. Update only the name
+PATCH http://localhost:8080/exercise27/students/1
+Content-Type: application/json
+
+{
+  "name": "Angel Plata"
+}
+
+### 2. Update only the role
+PATCH http://localhost:8080/exercise27/students/1
+Content-Type: application/json
+
+{
+  "role": "Java backend developer"
+}
+
+### 3. Update both fields
+PATCH http://localhost:8080/exercise27/students/2
+Content-Type: application/json
+
+{
+  "name": "Kratos of Sparta",
+  "role": "Backend destroyer"
+}
+
+### 4. Send an empty body
+PATCH http://localhost:8080/exercise27/students/1
+Content-Type: application/json
+
+{
+}
+
+### 5. Try to update a missing student
+PATCH http://localhost:8080/exercise27/students/99
+Content-Type: application/json
+
+{
+  "role": "Developer"
+}
