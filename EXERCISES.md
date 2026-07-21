@@ -1027,3 +1027,330 @@ catch {
 
 **Status:**
 Done
+
+## Exercise 26 - Complete student update
+
+**Purpose:**
+This exercise introduces how to completely replace the data of an existing student using a PUT request and an id received through the URL.
+
+**URL:**
+http://localhost:8080/exercise26/students/{id}
+
+**HTTP method:**
+PUT
+
+**Main concepts:**
+
+* `@PutMapping`
+* `@PathVariable`
+* `@RequestBody`
+* `ArrayList`
+* Iterating through a list by index
+* `List.get()`
+* `List.set()`
+* Complete resource replacement
+* `ResponseEntity<Student>`
+* HTTP 200 OK
+* HTTP 404 Not Found
+* HTTP 405 Method Not Allowed
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise26/StudentFullUpdateController.java`
+
+**Interactive PowerShell request:**
+
+```powershell
+$id = Read-Host "Introduce el ID del estudiante"
+$name = Read-Host "Introduce el nuevo nombre"
+$role = Read-Host "Introduce el nuevo rol"
+
+$body = @{
+    id   = [int]$id
+    name = $name
+    role = $role
+} | ConvertTo-Json
+
+try {
+    $student = Invoke-RestMethod `
+        -Uri "http://localhost:8080/exercise26/students/$id" `
+        -Method Put `
+        -ContentType "application/json" `
+        -Body $body
+
+    Write-Host "Student updated successfully:"
+    $student
+}
+catch {
+    $statusCode = $_.Exception.Response.StatusCode.value__
+
+    if ($statusCode -eq 404) {
+        Write-Host "Student not found."
+    }
+    else {
+        Write-Host "Request failed with status code $statusCode."
+    }
+}
+```
+
+**Expected successful response:**
+
+```json
+{
+  "id": 1,
+  "name": "Angel Plata",
+  "role": "Java developer"
+}
+```
+
+**Expected missing student response:**
+
+```text
+Student not found.
+```
+
+**Tested cases:**
+
+* Existing student id returns HTTP 200 OK.
+* All student fields are replaced with the received data.
+* The id from the URL is preserved in the updated student.
+* Missing student id returns HTTP 404 Not Found.
+* Sending a POST request instead of PUT returns HTTP 405 Method Not Allowed.
+* `List.set(index, updatedStudent)` replaces the student stored at a specific list position.
+
+**Status:**
+Done
+
+---
+
+## Exercise 27 - Partial student update
+
+**Purpose:**
+This exercise introduces how to update only the fields received in a PATCH request while preserving the existing values of the other student fields.
+
+**URL:**
+http://localhost:8080/exercise27/students/{id}
+
+**HTTP method:**
+PATCH
+
+**Main concepts:**
+
+* `@PatchMapping`
+* `@PathVariable`
+* `@RequestBody`
+* Partial resource update
+* Optional request fields
+* `ArrayList`
+* `List.get()`
+* `List.set()`
+* Ternary operator
+* Null validation
+* `isBlank()`
+* HTTP 200 OK
+* HTTP 404 Not Found
+* REST Client `.http` files
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise27/StudentPartialUpdateController.java`
+
+**Request file:**
+`requests/exercise27.http`
+
+**Update only the name:**
+
+```http
+### Update only the student's name
+PATCH http://localhost:8080/exercise27/students/1
+Content-Type: application/json
+
+{
+  "name": "Angel Plata"
+}
+```
+
+**Update only the role:**
+
+```http
+### Update only the student's role
+PATCH http://localhost:8080/exercise27/students/1
+Content-Type: application/json
+
+{
+  "role": "Java backend developer"
+}
+```
+
+**Update both fields:**
+
+```http
+### Update the student's name and role
+PATCH http://localhost:8080/exercise27/students/2
+Content-Type: application/json
+
+{
+  "name": "Kratos of Sparta",
+  "role": "Backend destroyer"
+}
+```
+
+**Send an empty body:**
+
+```http
+### Preserve every current value
+PATCH http://localhost:8080/exercise27/students/1
+Content-Type: application/json
+
+{
+}
+```
+
+**Try to update a missing student:**
+
+```http
+### Try to update a missing student
+PATCH http://localhost:8080/exercise27/students/99
+Content-Type: application/json
+
+{
+  "role": "Developer"
+}
+```
+
+**Expected successful response:**
+
+```json
+{
+  "id": 1,
+  "name": "Angel",
+  "role": "Java backend developer"
+}
+```
+
+**Expected missing student status:**
+
+```text
+404 Not Found
+```
+
+**Java language tip:**
+
+The ternary operator provides a compact alternative to an `if/else` assignment:
+
+```java
+String updatedRole =
+    request.role() != null && !request.role().isBlank()
+        ? request.role()
+        : currentStudent.role();
+```
+
+It is equivalent to:
+
+```java
+String updatedRole;
+
+if (request.role() != null && !request.role().isBlank()) {
+    updatedRole = request.role();
+} else {
+    updatedRole = currentStudent.role();
+}
+```
+
+**Tested cases:**
+
+* Updating only the name preserves the current role.
+* Updating only the role preserves the current name.
+* Sending both fields updates both values.
+* Sending an empty JSON object preserves every current value.
+* Missing student id returns HTTP 404 Not Found.
+* The role condition must use `!request.role().isBlank()` so that non-empty roles are accepted.
+* The controller does not include a GET endpoint for listing all students.
+
+**Status:**
+Done
+
+## Exercise 28 - Automatic student id
+
+**Purpose:**
+This exercise introduces automatic id generation when creating students. The client sends only the name and role, while the server assigns the next available id.
+
+**URL:**
+http://localhost:8080/exercise28/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* Automatic id generation
+* Simulated autoincrement
+* `ArrayList`
+* `List.add()`
+* `@PostMapping`
+* `@GetMapping`
+* `@RequestBody`
+* `ResponseEntity<Student>`
+* `HttpStatus.CREATED`
+* Postincrement operator `nextId++`
+* Separate request and response models
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise28/StudentAutoIdController.java`
+
+**Request file:**
+`requests/exercise28.http`
+
+**Tested cases:**
+
+* POST creates a student and returns HTTP 201 Created.
+* The client does not send the student id.
+* The first student receives id `1`.
+* Each new student receives the next available id.
+* The created student is stored in the `ArrayList`.
+* GET returns all stored students.
+* Restarting the application clears the list and resets the id counter.
+
+**Status:**
+Done
+
+## Exercise 29 - Prevent duplicate students
+
+**Purpose:**
+This exercise prevents creating students with duplicate names by checking the existing in-memory list before saving.
+
+**URL:**
+http://localhost:8080/exercise29/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* Duplicate detection
+* `Stream`
+* `anyMatch()`
+* `equalsIgnoreCase()`
+* `@PostMapping`
+* `@GetMapping`
+* `ResponseEntity<?>`
+* `HttpStatus.CREATED`
+* `HttpStatus.CONFLICT`
+* HTTP 409 Conflict
+* Automatic id generation
+
+**File:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise29/StudentDuplicateController.java`
+
+**Request file:**
+`requests/exercise29.http`
+
+**Tested cases:**
+
+* A new student returns HTTP 201 Created.
+* A duplicated name returns HTTP 409 Conflict.
+* Duplicate detection ignores uppercase and lowercase differences.
+* A different student name is created successfully.
+* GET returns all stored students.
+* A rejected duplicate is not added to the list.
+
+**Status:**
+Done

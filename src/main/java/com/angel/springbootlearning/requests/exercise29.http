@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8080/exercise29/students
+
+### Create the first student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Angel",
+    "role": "Java developer"
+}
+
+### Try to create a duplicate student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Angel",
+    "role": "Backend developer"
+}
+
+### Create a different student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Kratos",
+    "role": "God of War"
+}
+
+### List all stored students
+GET {{baseUrl}}
