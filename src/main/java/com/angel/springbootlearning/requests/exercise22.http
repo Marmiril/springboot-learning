@@ -1,0 +1,11 @@
+@baseUrl = http://localhost:8080/exercise22/projects
+
+### Create a project
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Vivaldozart",
+  "type": "Trap Music"
+}
