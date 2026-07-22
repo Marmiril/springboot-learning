@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:8080/exercise24/projects
+
+### Get an existing project
+GET {{baseUrl}}/1
+
+### Get a non existing project
+GET {{baseUrl}}/99
