@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:8080/exercise25/projects
+
+### Delete an existing project
+DELETE {{baseUrl}}/1
+
+### Delete a non existing project
+DELETE {{baseUrl}}/99
