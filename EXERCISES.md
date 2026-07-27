@@ -1404,3 +1404,37 @@ GET, POST, PUT, PATCH, DELETE
 
 **Status:**
 Done
+
+
+## Exercise 31 - Separate Controller and Service
+
+**Purpose:**
+Separate the HTTP layer from the application logic by introducing a service class.
+
+**URL:**
+http://localhost:8080/exercise31/students
+
+**HTTP methods:**
+GET
+
+**Main concepts:**
+
+* Separation of responsibilities.
+* Controller and service layers.
+* Delegation from controller to service.
+
+**Files:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise31/StudentController.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise31/StudentService.java`
+
+**Request file:**
+`requests/exercise31.http`
+
+**Tested cases:**
+
+* Getting all students returns HTTP 200 OK.
+* The response contains the complete student list.
+
+**Status:**
+Done
