@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8080/exercise26/projects
+
+### Update existing student - 200 OK
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "title":"Karate",
+    "type":"Martial Arts"
+}
+
+### Update a non exisiting project -404 NOT FOUND
+PUT {{baseUrl}}/99
+Content-Type: application/json
+
+{
+    "id": 909,
+    "title": "UFO",
+    "type": "Paranormal"
+}
+
+### Unsuported method - 405 METHOD NOT ALLOWED
+POST {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "Philadelphia",
+    "type": "TOP SECRET"
+}
