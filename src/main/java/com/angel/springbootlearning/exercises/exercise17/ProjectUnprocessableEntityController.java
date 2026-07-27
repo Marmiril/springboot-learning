@@ -53,7 +53,7 @@ public class ProjectUnprocessableEntityController {
             message
         );
 
-        return new ResponseEntity(errorResponse, status);
+        return new ResponseEntity <>(errorResponse, status);
     }
 
     public record CreateProjectResquest(String title, String type) {}
