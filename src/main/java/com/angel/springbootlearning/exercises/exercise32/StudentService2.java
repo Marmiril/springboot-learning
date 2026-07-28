@@ -13,7 +13,7 @@ package com.angel.springbootlearning.exercises.exercise32;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentService {
+public class StudentService2 {
     
     private final List<Student> students = new ArrayList<>(
         List.of(
@@ -28,7 +28,7 @@ public class StudentService {
     public List<Student> getStudents() { return new ArrayList<>(students); }
 
     // Creates the stored student and assigns its definitive ID
-    public Student createStudent(Student receivedStudent) {
+    public Student createStudent(StudentRequest receivedStudent) {
         Student createdStudent = new Student(
             nextId++,
             receivedStudent.name(),

@@ -1438,3 +1438,42 @@ GET
 
 **Status:**
 Done
+
+## Exercise 32 - Create StudentService
+
+**Purpose:**
+Centralize student listing and creation operations inside a service class.
+
+**URL:**
+http://localhost:8080/exercise32/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* Service layer.
+* Separation of responsibilities.
+* Delegation from controller to service.
+* Automatic ID generation with `nextId++`.
+* Defensive copy of a collection.
+
+**Files:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise32/Student.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise32/StudentService2.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise32/StudentController2.java`
+
+**Request file:**
+`requests/exercise32.http`
+
+**Tested cases:**
+
+* Getting all students returns HTTP 200 OK.
+* Creating a student returns HTTP 201 Created.
+* The service assigns the next available ID.
+* The created student appears in subsequent GET requests.
+
+**Status:**
+Done

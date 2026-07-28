@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:8080/exercise32/students
+
+### Get all students ###
+GET {{baseUrl}}
+Accept: application/json
+
+### Create student ###
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Lara",
+    "role": "Raider"
+}
