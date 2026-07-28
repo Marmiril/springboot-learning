@@ -1477,3 +1477,47 @@ GET, POST
 
 **Status:**
 Done
+
+## Exercise 33 - Constructor Injection
+
+**Purpose:**
+Use constructor injection to provide a Spring-managed service to a controller.
+
+**URL:**
+http://localhost:8080/exercise33/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* `@Service`.
+* Spring-managed components.
+* Constructor injection.
+* Dependency inversion.
+* Automatic ID generation.
+
+**Files:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise33/Student.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise33/StudentRequest.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise33/StudentService3.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise33/StudentController3.java`
+
+**Request file:**
+`requests/exercise33.http`
+
+**Tested cases:**
+
+* Getting all students returns HTTP 200 OK.
+* Creating a student returns HTTP 201 Created.
+* The service automatically assigns ID 3.
+* The created student appears in subsequent GET requests.
+
+**Status:**
+Done
+
+
+
