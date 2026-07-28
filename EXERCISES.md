@@ -1521,3 +1521,45 @@ Done
 
 
 
+
+## Exercise 34 - Simulated repository layer
+
+**Purpose:**
+Separate in-memory data storage from business logic by introducing a repository layer.
+
+**URL:**
+http://localhost:8080/exercise34/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* `@Repository`.
+* Repository layer.
+* Constructor injection.
+* Separation of responsibilities.
+* In-memory persistence.
+* Automatic ID generation.
+
+**Files:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise34/StudentController4.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise34/StudentService4.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise34/StudentRepository.java`
+
+**Request file:**
+`requests/exercise34.http`
+
+**Tested cases:**
+
+* Getting all students returns HTTP 200 OK.
+* Creating a student returns HTTP 201 Created.
+* The client sends only the name and role.
+* The service assigns the ID automatically.
+* The repository stores the created student.
+* The created student appears in the following GET request.
+
+**Status:**
+Done
