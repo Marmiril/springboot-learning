@@ -1563,3 +1563,88 @@ GET, POST
 
 **Status:**
 Done
+
+## Exercise 35 - Shared repository
+
+**Purpose:**
+Reuse a shared student repository across different exercises instead of creating a new repository for each one.
+
+**URL:**
+http://localhost:8080/exercise35/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* Shared repository.
+* Reusable project components.
+* Constructor injection.
+* Separation between controller, service and repository.
+* Automatic ID generation.
+
+**Files:**
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise35/StudentController5.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise35/StudentService5.java`
+
+`src/main/java/com/angel/springbootlearning/student/repository/StudentRepository.java`
+
+**Request file:**
+`requests/exercise35.http`
+
+**Tested cases:**
+
+* Getting all students returns HTTP 200 OK.
+* Creating a student returns HTTP 201 Created.
+* The client sends only the name and role.
+* The service assigns the ID automatically.
+* The shared repository stores the created student.
+* The created student appears in the following GET request.
+
+**Status:**
+Done
+
+## Exercise 36 - Service validation
+
+**Purpose:**
+Validate student data in the service layer before storing it.
+
+**URL:**
+http://localhost:8080/exercise36/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* Service-layer validation.
+* `ResponseStatusException`.
+* Private validation methods.
+* `Stream` and `anyMatch()`.
+* `equalsIgnoreCase()`.
+* HTTP 400 Bad Request.
+* HTTP 409 Conflict.
+
+**Files:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise36/StudentController6.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise36/StudentService6.java`
+
+`src/main/java/com/angel/springbootlearning/student/repository/StudentRepository.java`
+
+**Request file:**
+`requests/exercise36.http`
+
+**Tested cases:**
+
+* Getting all students returns HTTP 200 OK.
+* Creating a valid student returns HTTP 201 Created.
+* Duplicate names return HTTP 409 Conflict.
+* Duplicate names with different capitalization return HTTP 409 Conflict.
+* Empty, blank or missing names return HTTP 400 Bad Request.
+* Empty or missing roles return HTTP 400 Bad Request.
+
+**Status:**
+Pending verification

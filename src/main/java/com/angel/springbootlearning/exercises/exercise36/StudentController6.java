@@ -1,15 +1,15 @@
 /*
- * Exercise 35 - Clean controller
+ * Exercise 36 - Service validation
  *
  * Purpose:
- * This exercise keeps the controller focused exclusively
- * on handling HTTP requests and responses.
+ * This exercise delegates student validation and creation
+ * to the service layer.
  *
  * URL:
- * http://localhost:8080/exercise35/students
+ * http://localhost:8080/exercise36/students
  */
 
-package com.angel.springbootlearning.exercises.exercise35;
+package com.angel.springbootlearning.exercises.exercise36;
 
 import java.util.List;
 
@@ -25,12 +25,12 @@ import com.angel.springbootlearning.student.dto.StudentRequest;
 import com.angel.springbootlearning.student.model.Student;
 
 @RestController
-@RequestMapping("/exercise35/students")
-public class StudentController5 {
+@RequestMapping("/exercise36/students")
+public class StudentController6 {
 
-    private final StudentService5 studentService;
+    private final StudentService6 studentService;
 
-    public StudentController5(StudentService5 studentService) {
+    public StudentController6(StudentService6 studentService) {
         this.studentService = studentService;
     }
 
@@ -40,10 +40,12 @@ public class StudentController5 {
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody StudentRequest request) {
-        Student createdStudent = studentService.createStudent(request);
-        return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body(createdStudent);
-    }
+    public ResponseEntity<Student> createStudent(
+        @RequestBody StudentRequest request) {
+            Student createdStudent = studentService.createStudent(request);
+
+            return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(createdStudent);
+        }        
 }
