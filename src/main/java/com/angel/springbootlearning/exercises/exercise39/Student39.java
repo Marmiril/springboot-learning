@@ -4,6 +4,4 @@ public record Student39 (
     int id, 
     String name, 
     String role
-) {
-    
-}
+) {}
