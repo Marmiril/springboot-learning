@@ -1,0 +1,88 @@
+@baseUrl = http://localhost:8080/exercise36/students
+
+### Get all students
+GET {{baseUrl}}
+Accept: application/json
+
+
+### Create student successfully
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Lara",
+    "role": "Raider"
+}
+
+
+### Check the updated student list
+GET {{baseUrl}}
+Accept: application/json
+
+
+### Error: duplicate student name - 409 Conflict
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Lara",
+    "role": "Archaeologist"
+}
+
+
+### Error: duplicate name with different capitalization - 409 Conflict
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "lara",
+    "role": "Adventurer"
+}
+
+
+### Error: empty student name - 400 Bad Request
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "",
+    "role": "Backend"
+}
+
+
+### Error: blank student name - 400 Bad Request
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "   ",
+    "role": "Backend"
+}
+
+
+### Error: empty student role - 400 Bad Request
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Geralt",
+    "role": ""
+}
+
+
+### Error: missing student name - 400 Bad Request
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "role": "Backend"
+}
+
+
+### Error: missing student role - 400 Bad Request
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Geralt"
+}
