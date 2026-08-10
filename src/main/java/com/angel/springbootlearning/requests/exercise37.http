@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8080/exercise37/students
+
+### Get all the students - 200 OK
+GET {{baseUrl}}
+Accept: application/json
+
+### Create the first student - 201 CREATED
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Angel",
+    "role":"backend"
+}
+
+### Create a second student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Doom guy",
+    "role":"Doom slayer"
+}
+
+### Get an existing student by id - 200 OK
+GET {{baseUrl}}/2
+Accept: application/json
+
+### Error: student does not exists - 404 NOT FOUND
+GET {{baseUrl}}/666
+Accept: application/json
