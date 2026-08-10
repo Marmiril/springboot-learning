@@ -1647,4 +1647,103 @@ GET, POST
 * Empty or missing roles return HTTP 400 Bad Request.
 
 **Status:**
-Pending verification
+DONE
+
+## Exercise 37 - In-memory repository
+
+**Purpose:**
+Manage students through an independent in-memory repository and retrieve them by ID.
+
+**URL:**
+http://localhost:8080/exercise37/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* Controller, service and repository layers.
+* In-memory data storage.
+* Constructor injection.
+* Automatic ID generation.
+* `Optional<Student37>`.
+* `filter()` and `findFirst()`.
+* `orElseThrow()`.
+* HTTP 404 Not Found.
+
+**Files:**
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise37/Student37.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise37/StudentRequest37.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise37/StudentRepository37.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise37/StudentService37.java`
+
+`src/main/java/com/angel/springbootlearning/exercises/exercise37/StudentController37.java`
+
+**Request file:**
+`requests/exercise37.http`
+
+**Tested cases:**
+
+* Getting an empty student list returns HTTP 200 OK.
+* Creating students returns HTTP 201 Created.
+* The service assigns IDs automatically.
+* Created students are stored in memory.
+* Getting an existing student by ID returns HTTP 200 OK.
+* Getting a nonexistent student returns HTTP 404 Not Found.
+
+**Status:**
+DONE
+
+## Exercise 38 - Complete layered flow
+
+**Purpose:**
+Manage students through controller, service and repository layers, including filtering by role and customized error responses.
+
+**URL:**
+http://localhost:8080/exercise38/students
+
+**HTTP methods:**
+GET, POST
+
+**Main concepts:**
+
+* Complete flow: Controller → Service → Repository.
+* Filtering students by role with `@RequestParam`.
+* Returning multiple matches with `filter()` and `toList()`.
+* Checking empty lists with `isEmpty()`.
+* Custom list responses with `StudentListResponse38`.
+* Centralized exception handling with `@RestControllerAdvice`.
+* Custom JSON errors with `ErrorResponse38`.
+* Handling exceptions with `@ExceptionHandler`.
+
+**Files:**
+
+* `Student38.java`
+* `StudentRequest38.java`
+* `StudentRepository38.java`
+* `StudentService38.java`
+* `StudentController38.java`
+* `StudentListResponse38.java`
+* `ErrorResponse38.java`
+* `GlobalExceptionHandler38.java`
+
+**Request file:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise38/exercise38.http`
+
+**Tested cases:**
+
+* Getting an empty list returns HTTP 200 OK with an explanatory message.
+* Creating students returns HTTP 201 Created.
+* Getting all students returns HTTP 200 OK.
+* Filtering students by an existing role returns HTTP 200 OK.
+* Filtering by a nonexistent role returns HTTP 404 Not Found.
+* Getting an existing student by ID returns HTTP 200 OK.
+* Getting a nonexistent student returns HTTP 404 Not Found.
+* Errors use the customized `ErrorResponse38` JSON structure.
+
+**Status:**
+DONE

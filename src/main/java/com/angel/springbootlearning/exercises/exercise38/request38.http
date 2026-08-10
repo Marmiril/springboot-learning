@@ -1,0 +1,60 @@
+@baseUrl = http://localhost:8080/exercise38/students
+
+### Get all students when the list is empty - 200 OK
+GET {{baseUrl}}
+Accept: application/json
+
+
+### Create the first student - 201 Created
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Angel",
+    "role": "Backend"
+}
+
+
+### Create the second student with the same role - 201 Created
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Doom guy",
+    "role": "Backend"
+}
+
+
+### Create a student with a different role - 201 Created
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Ripley",
+    "role": "Frontend"
+}
+
+
+### Get all students - 200 OK
+GET {{baseUrl}}
+Accept: application/json
+
+
+### Filter students by role - 200 OK
+GET {{baseUrl}}?role=Backend
+Accept: application/json
+
+
+### Error: no students with this role - 404 Not Found
+GET {{baseUrl}}?role=DevOps
+Accept: application/json
+
+
+### Get an existing student by ID - 200 OK
+GET {{baseUrl}}/1
+Accept: application/json
+
+
+### Error: student does not exist - 404 Not Found
+GET {{baseUrl}}/999
+Accept: application/json
