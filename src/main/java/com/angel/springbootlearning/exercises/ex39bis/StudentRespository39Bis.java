@@ -24,7 +24,7 @@ public class StudentRespository39Bis {
     
     private final List<Student39Bis> students = new ArrayList<>();
 
-    public List<Student39Bis> findAll() { return new ArrayList<>(students); }
+    public List<Student39Bis> findAll() { return List.copyOf(students); }
 
     public Student39Bis create(Student39Bis student) {
         students.add(student);
@@ -50,7 +50,7 @@ public class StudentRespository39Bis {
     }
 
     public Optional<Student39Bis> update(Student39Bis updatedStudent) {
-        for (int index = 0; index < students.size()) {
+        for (int index = 0; index < students.size(); index++) {
             if (students.get(index).id() == updatedStudent.id()) {
                 students.set(index, updatedStudent);
 

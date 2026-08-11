@@ -17,5 +17,5 @@ public record Student39Bis(
     int id, 
     String name,
     String role,
-    LocalDateTime registrationTime
+    LocalDateTime registrationDate
 ) {}
