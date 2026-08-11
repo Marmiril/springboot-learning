@@ -14,11 +14,9 @@ package com.angel.springbootlearning.exercises.exercise39;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.angel.springbootlearning.exercises.exercise22.StudentCreateController.Student;
 
 @Service
 public class StudentService39 {
@@ -57,6 +55,15 @@ public class StudentService39 {
         return students;
     }
 
+    public Student39 getStudentByName(String name) {
+        return studentRepository
+            .findByName(name)
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "There is no student witn name: " + name
+            ));
+    }
+    
     public Student39 createStudent(StudentRequest39 request) {
         validateRequest(request);
         validateDuplicatedName(request.name(), null);
@@ -126,13 +133,13 @@ public class StudentService39 {
             ));
     }
 
-    public void deleteStudent(int id) {
-        if (!studentRepository.deleteById(id)) {
-            throw new ResponseStatusException(
+    public Student39 deleteStudent(int id) {
+        return studentRepository
+            .deleteById(id)
+            .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
                 "There is no student with id: " + id
-            );
-        }
+            ));
     }
 
     private void validateRequest(StudentRequest39 request) {
@@ -166,8 +173,5 @@ public class StudentService39 {
                     "A student with this name already exists: " + name
                 );
             });
-    }
-
-
-    
+    }    
 }

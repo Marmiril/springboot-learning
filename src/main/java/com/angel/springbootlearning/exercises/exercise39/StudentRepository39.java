@@ -59,8 +59,13 @@ public class StudentRepository39 {
                 .anyMatch(student -> student.name().equalsIgnoreCase(name.trim()));
     }
 
-    public boolean deleteById(int id) {
-        return students.removeIf(student -> student.id() == id);
+    // Removes and returns the student if the ID exists
+    public Optional<Student39> deleteById(int id) {
+       Optional<Student39> student = findById(id);
+
+       student.ifPresent(students::remove);
+       
+       return student;
     }
 
     // Replaces the stored student and returns it if the id exists
