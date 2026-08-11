@@ -1,0 +1,169 @@
+### Exercise 39 - Layered student CRUD
+### Base URL
+@baseUrl = http://localhost:8080/exercise39/students
+
+### Get all students when the list is empty
+GET {{baseUrl}}
+
+### Create the first student - 201 Created
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Angel",
+    "role": "Backend"
+}
+
+### Create the second student - 201 Created
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Maria",
+    "role": "Frontend"
+}
+
+### Create a student with a duplicate name - 409 Conflict
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "angel",
+    "role": "Full Stack"
+}
+
+### Create a student with an empty name - 400 Bad Request
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "",
+    "role": "Backend"
+}
+
+### Create a student with an empty role - 400 Bad Request
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Pedro",
+    "role": "   "
+}
+
+### Get all students
+GET {{baseUrl}}
+
+### Get a student by ID
+GET {{baseUrl}}/1
+
+### Get a missing student by ID - 404 Not Found
+GET {{baseUrl}}/999
+
+### Search for a student by name
+GET {{baseUrl}}?name=Angel
+
+### Search for a missing student by name - 404 Not Found
+GET {{baseUrl}}?name=Unknown
+
+### Search with an empty name - 400 Bad Request
+GET {{baseUrl}}?name=
+
+### Filter students by role
+GET {{baseUrl}}?role=Backend
+
+### Filter by a missing role - 404 Not Found
+GET {{baseUrl}}?role=DevOps
+
+### Filter with an empty role - 400 Bad Request
+GET {{baseUrl}}?role=
+
+### Use name and role simultaneously - 400 Bad Request
+GET {{baseUrl}}?name=Angel&role=Backend
+
+### Fully update a student - 200 OK
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "name": "Angel",
+    "role": "Full Stack"
+}
+
+### Fully update a student with missing data - 400 Bad Request
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "name": "Angel",
+    "role": ""
+}
+
+### Fully update a student with a duplicate name - 409 Conflict
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "name": "Maria",
+    "role": "Backend"
+}
+
+### Fully update a missing student - 404 Not Found
+PUT {{baseUrl}}/999
+Content-Type: application/json
+
+{
+    "name": "Unknown",
+    "role": "Backend"
+}
+
+### Partially update a student's role - 200 OK
+PATCH {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "role": "Backend"
+}
+
+### Partially update a student's name - 200 OK
+PATCH {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "name": "Angel Updated"
+}
+
+### Send an empty partial update - 400 Bad Request
+PATCH {{baseUrl}}/1
+Content-Type: application/json
+
+{}
+
+### Partially update with an empty field - 400 Bad Request
+PATCH {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "name": ""
+}
+
+### Partially update with a duplicate name - 409 Conflict
+PATCH {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "name": "Maria"
+}
+
+### Partially update a missing student - 404 Not Found
+PATCH {{baseUrl}}/999
+Content-Type: application/json
+
+{
+    "role": "DevOps"
+}
+
+### Delete a student and return their data - 200 OK
+DELETE {{baseUrl}}/2
+
+### Delete a missing student - 404 Not Found
+DELETE {{baseUrl}}/999

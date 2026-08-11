@@ -1747,3 +1747,48 @@ GET, POST
 
 **Status:**
 DONE
+
+## Exercise 39 - Layered student CRUD
+
+**Purpose:**
+Refactor the complete in-memory student CRUD using Controller, Service and Repository layers.
+
+**URL:**
+http://localhost:8080/exercise39/students
+
+**HTTP methods:**
+GET, POST, PUT, PATCH, DELETE
+
+**Main concepts:**
+
+* Layered architecture: Controller, Service and Repository.
+* Dependency injection through constructors.
+* In-memory persistence with `ArrayList`.
+* Searches by ID and name using `Optional`.
+* Filtering by role using `Stream`.
+* Full updates with PUT and partial updates with PATCH.
+* Personalized success and error responses.
+* Centralized exception handling.
+
+**Files:**
+`src/main/java/com/angel/springbootlearning/exercises/exercise39/`
+
+**Request file:**
+`requests/exercise39.http`
+
+**Tested cases:**
+
+* List all students and return a personalized message for an empty list.
+* Create students successfully with HTTP 201 Created.
+* Search by ID or name and filter by role.
+* Reject simultaneous `name` and `role` parameters with HTTP 400 Bad Request.
+* Reject missing or empty required data with HTTP 400 Bad Request.
+* Reject an empty PATCH request with HTTP 400 Bad Request.
+* Reject duplicate names with HTTP 409 Conflict.
+* Return HTTP 404 Not Found for missing IDs, names and roles.
+* Update students successfully with PUT and PATCH.
+* Delete a student by ID with HTTP 200 OK and return the deleted student's data.
+* Return HTTP 404 Not Found when deleting a missing student.
+
+**Status:**
+DONE
