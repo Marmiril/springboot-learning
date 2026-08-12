@@ -24,10 +24,10 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class StudentService39Bis {
     
-    private final StudentRespository39Bis studentRepository;
+    private final StudentRepository39Bis studentRepository;
     private int nextId = 1;
 
-    public StudentService39Bis(StudentRespository39Bis studentRepository) { this.studentRepository = studentRepository; }
+    public StudentService39Bis(StudentRepository39Bis studentRepository) { this.studentRepository = studentRepository; }
 
     public List<Student39Bis> getStudents() { return studentRepository.findAll(); }
 
@@ -60,8 +60,6 @@ public class StudentService39Bis {
         Student39Bis existingStudent = requireStudentById(id);
 
         validateRequest(request);
-        validateRequiredField(request.name(), "Name");
-        validateRequiredField(request.role(), "Role");
         validateUniqueName(request.name(), id);
 
         Student39Bis updatedStudent = new Student39Bis(

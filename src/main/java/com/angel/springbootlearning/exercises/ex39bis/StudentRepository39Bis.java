@@ -15,12 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import com.angel.springbootlearning.exercises.exercise22.StudentCreateController.Student;
-
-@Service
-public class StudentRespository39Bis {
+@Repository
+public class StudentRepository39Bis {
     
     private final List<Student39Bis> students = new ArrayList<>();
 
