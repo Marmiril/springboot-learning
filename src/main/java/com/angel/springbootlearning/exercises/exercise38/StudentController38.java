@@ -44,7 +44,7 @@ public class StudentController38 {
 
             String message = students.isEmpty()
                 ? "There are no students registered"
-                : "Students retreived successfully";
+                : "Students retrieved successfully";
 
             StudentListResponse38 response =
                 new StudentListResponse38(message, students);

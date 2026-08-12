@@ -12,6 +12,7 @@
 
 package com.angel.springbootlearning.exercises.ex39bis;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class StudentClassResponse39Bis {
@@ -32,6 +33,14 @@ public record StudentDeletionListResponse39Bis(
     String message,
     int deletedCount,
     List<Student39Bis> students
+) {}
+
+public record ErrorResponse39Bis(
+    LocalDateTime timestamp,
+    int status, 
+    String error,
+    String message,
+    String path
 ) {}
 
 }

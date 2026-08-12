@@ -77,7 +77,13 @@ public class StudentService39Bis {
     public Student39Bis patchStudent(int id, StudentRequest39Bis request) {
         Student39Bis existingStudent = requireStudentById(id);
 
-        validateRequest(request);
+        if (request == null) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Request body is required"
+            );
+        }        
+
         if(request.name() == null && request.role() == null) {
             throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST,
@@ -155,15 +161,16 @@ public class StudentService39Bis {
 
     private void validateUniqueName(String name, int currentStudentId) {
         
+        String normalizedName = name.trim();
         boolean duplicatedName = studentRepository
-            .findByName(name)
+            .findByName(normalizedName)
             .filter(student -> student.id() != currentStudentId)
             .isPresent();
         
         if (duplicatedName) {
             throw new ResponseStatusException(
                 HttpStatus.CONFLICT,
-                "There is a student with name: " + name
+                "There is a student with name: " + normalizedName
             );
         }
     }

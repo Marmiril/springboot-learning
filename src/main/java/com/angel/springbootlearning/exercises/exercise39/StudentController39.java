@@ -65,12 +65,12 @@ public class StudentController39 {
             }
 
             String message = name != null 
-                ? "Student with name " + name + " retreived successfully."
+                ? "Student with name " + name + " retrieved successfully."
                 : role != null
-                    ? "Students with role " + role + " retreived successfully."
+                    ? "Students with role " + role + " retrieved successfully."
                     : students.isEmpty()
                         ? "There are not students registered yet."
-                        : "Students retreived successfully.";
+                        : "Students retrieved successfully.";
 
             StudentListResponse39 response = new StudentListResponse39(message, students);
 
