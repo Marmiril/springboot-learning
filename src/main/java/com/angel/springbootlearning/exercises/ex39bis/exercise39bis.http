@@ -1,0 +1,172 @@
+@baseUrl = http://localhost:8080/exercise39bis/students
+
+### Get all students with empty list
+GET {{baseUrl}}
+
+### Create first student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Ángel",
+    "role":"Backend developer"
+}
+
+### Create second student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Kratos",
+    "role":"God of War"
+}
+
+### Create third student
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"DoomSlayer",
+    "role":"Demon Slayer"
+}
+
+### Same role
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Dante",
+    "role":"Demon Slayer"
+}
+
+### Get all students 
+GET {{baseUrl}}
+
+### Get student by ID
+GET {{baseUrl}}/1
+
+### Get student by Name
+GET {{baseUrl}}?name=Kratos
+
+### Get students by role
+GET {{baseUrl}}?role=Demon Slayer
+
+### Create student with a duplicate normalized name
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":" ANGEL ",
+    "role":"Demon Slayer"
+}
+
+### Create student with an empty name
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"",
+    "role":"Student"
+}
+
+### Empty role
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name":"Lara",
+    "role":""
+}
+
+### Non-existing ID
+GET {{baseUrl}}/666
+
+### Non-existing name
+GET {{baseUrl}}?name=Vegeta
+
+### Non-existing rol
+GET {{baseUrl}}?role=Raider
+
+### Fully update student
+PUT {{baseUrl}}/5
+Content-Type: application/json
+
+{
+    "name":"Vegeta",
+    "role":"Worlds crusher"
+}
+
+### Update with only one field - name
+PUT {{baseUrl}}/2
+Content-Type: application/json
+
+{
+    "name":"Piccolo"
+}
+
+### Fully update with duplicate name
+PUT {{baseUrl}}/5
+Content-Type: application/json
+
+{
+    "name":"Dante",
+    "role":"Master of Love"
+}
+
+### Fully update non-existing student
+PUT {{baseUrl}}/99
+Content-Type: application/json
+
+{
+    "name":"Piccolo",
+    "role":"King of Hell"
+}
+
+### Partially update student role
+PATCH {{baseUrl}}/2
+Content-Type: application/json
+
+{
+    "role":"Ghost of Sparta"
+}
+
+### Update only name
+PATCH {{baseUrl}}/2
+Content-Type: application/json
+
+{
+    "name":"God of War"
+}
+
+### Partially update both fields
+PATCH {{baseUrl}}/2
+Content-Type: application/json
+
+{
+    "name":"Kratos",
+    "role":"God of War"
+}
+
+### Patch without fields
+PATCH {{baseUrl}}/2
+Content-Type: application/json
+
+{}
+
+### Patch with empty field
+PATCH {{baseUrl}}/2
+Content-Type: application/json
+
+{
+    "name":""
+}
+
+### Delete student by ID
+DELETE {{baseUrl}}/1
+
+### Delete by name
+DELETE {{baseUrl}}?name=angel
+
+### Delete students by role
+DELETE {{baseUrl}}?role=Demon Slayer
+

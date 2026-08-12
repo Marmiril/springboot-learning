@@ -1792,3 +1792,63 @@ GET, POST, PUT, PATCH, DELETE
 
 **Status:**
 DONE
+
+## Exercise 39 Bis - Advanced Layered CRUD
+
+**Purpose:**
+Implement a complete in-memory student CRUD using controller, service and repository layers, uniform responses, validation and centralized error handling.
+
+**URL:**
+http://localhost:8080/exercise39bis/students
+
+**HTTP methods:**
+GET, POST, PUT, PATCH, DELETE
+
+**Main concepts:**
+
+* Layered architecture
+* Constructor dependency injection
+* Immutable records and collections
+* Search by ID, name and role
+* Full and partial updates
+* Normalized duplicate validation
+* Structured success and error responses
+* Global exception handling
+* Automatic ID and registration date
+* Multiple deletion by role
+
+**Files:**
+
+* `Student39Bis.java`
+* `StudentRequest39Bis.java`
+* `StudentClassResponse39Bis.java`
+* `StudentRepository39Bis.java`
+* `StudentService39Bis.java`
+* `StudentController39Bis.java`
+* `GlobalExceptionHandler39Bis.java`
+
+**Request file:**
+`exercise39bis.http`
+
+**Tested cases:**
+
+* Empty collection returns HTTP 200 OK with an informative message.
+* Students are created with an automatic ID and registration date.
+* Students can be retrieved by ID, name and role.
+* A duplicate normalized name returns HTTP 409 Conflict.
+* Empty required fields return HTTP 400 Bad Request.
+* Missing students and roles return HTTP 404 Not Found.
+* PUT updates every editable field.
+* PATCH updates one or both editable fields.
+* An empty PATCH request returns HTTP 400 Bad Request.
+* Students can be deleted by ID and name.
+* Multiple students can be deleted by role.
+* Multiple deletion returns the number and list of deleted students.
+* The collection returns to an empty state after deletion.
+
+**Status:**
+DONE
+
+
+
+

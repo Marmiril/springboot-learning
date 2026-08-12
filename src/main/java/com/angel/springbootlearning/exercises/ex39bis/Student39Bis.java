@@ -11,11 +11,13 @@
 
 package com.angel.springbootlearning.exercises.ex39bis;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 
 public record Student39Bis(
     int id, 
     String name,
     String role,
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime registrationDate
 ) {}
