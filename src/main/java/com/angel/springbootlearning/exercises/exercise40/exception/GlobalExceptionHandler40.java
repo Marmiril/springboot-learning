@@ -56,5 +56,23 @@ public class GlobalExceptionHandler40 {
             .body(response);        
         }
     
-    
+    @ExceptionHandler(DuplicateStudentNameException40.class)
+    public ResponseEntity<ErrorResponse40> handleDuplicateStudentName(
+            DuplicateStudentNameException40 exception,
+            HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.CONFLICT;
+
+        ErrorResponse40 response = new ErrorResponse40(
+            LocalDateTime.now(ZoneId.of("Europe/Madrid")),
+            status.value(),
+            status.getReasonPhrase(),
+            exception.getMessage(),
+            request.getRequestURI()
+        );
+
+        return ResponseEntity
+            .status(status)
+            .body(response);
+        }
 }
