@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProjectHttpStatusController {
 
     @GetMapping("/exercise18/projects")
-    public ResponseEntity<List> getProjects() {return new ResponseEntity<>(getExistingProjects(), HttpStatus.OK); }
+    public ResponseEntity<List<?>> getProjects() {return new ResponseEntity<>(getExistingProjects(), HttpStatus.OK); }
 
     @GetMapping("/exercise18/projects/{id}") 
     public ResponseEntity<?>getProjectsById(@PathVariable int id) {

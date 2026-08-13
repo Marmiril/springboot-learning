@@ -12,6 +12,7 @@
 package com.angel.springbootlearning.exercises.ex39bis;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class GlobalExceptionHandler39Bis {
         int status = exception.getStatusCode().value();
 
         ErrorResponse39Bis response = new ErrorResponse39Bis(
-                LocalDateTime.now(),
+                LocalDateTime.now(ZoneId.of("Europe/Madrid")),
                 status,
                 HttpStatus.valueOf(status).getReasonPhrase(),
                 exception.getReason(),
