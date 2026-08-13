@@ -19,7 +19,6 @@ import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.angel.springbootlearning.exercises.exercise40.dto.StudentRequest40;
 import com.angel.springbootlearning.exercises.exercise40.exception.DuplicateStudentNameException40;
@@ -50,7 +49,7 @@ public class StudentService40 {
         validateUniqueName(request.name(), 0);
         
         Student40 student = new Student40(
-            nextId,
+            nextId++,
             request.name().trim(),
             request.role().trim(),
             LocalDateTime.now(ZoneId.of("Europe/Madrid"))
@@ -72,11 +71,68 @@ public class StudentService40 {
         );
 
         return studentRepository
-            .update(student)
+            .update(updatedStudent)
             .orElseThrow(() -> studentNotFoundById(id)
         );
 
     }
+
+    public Student40 patchStudent40(int id, StudentRequest40 request) {
+
+        Student40 student = requireStudentById(id);
+
+        if (request == null) { throw new InvalidStudentRequestException40("Request body is required"); }
+
+        if(request.name() == null && request.role() == null) { throw new InvalidStudentRequestException40("At least one field must be provided"); }
+
+        String updatedName = student.name();
+        String updatedRole = student.role();
+
+        if (request.name() != null) {
+            validateRequestField(request.name(), "Name");
+            validateUniqueName(request.name(), student.id());
+
+            updatedName = request.name().trim();
+        }
+
+        if (request.role() != null) {
+            validateRequestField(request.role(), "Role");
+
+            updatedRole = request.role().trim();
+        }
+
+        Student40 updatedStudent = new Student40(
+            student.id(),
+            updatedName,
+            updatedRole,
+            student.registrationDate()
+        );
+
+        return studentRepository
+            .update(updatedStudent)
+            .orElseThrow(() -> studentNotFoundById(id));
+    }
+
+    public Student40 deleteStudentById(int id) {    
+        Student40 student = requireStudentById(id);
+        studentRepository.deleteById(id);
+        return student;        
+    }
+
+    public Student40 deleteStudentByName(String name) {
+        validateRequestField(name, "Name");
+        Student40 student = requireStudentByName(name);
+        studentRepository.deleteByName(name);
+        return student;
+    }
+
+    public List<Student40> deleteStudentsByRole(String role) {
+        validateRequestField(role, "Role");
+        requireStudentsByRole(role);
+        return studentRepository.deleteByRole(role);        
+    }
+
+
 
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -117,12 +173,16 @@ public class StudentService40 {
     }
 
     private Student40 requireStudentByName(String name) {
+        validateRequestField(name, "Name");
+
         return studentRepository
             .findByName(name)
             .orElseThrow(() -> new StudentNotFoundException40(name));
     }
 
     private List<Student40> requireStudentsByRole(String role) {
+        validateRequestField(role, "Role");
+
         List<Student40> students = studentRepository.findByRole(role);
 
         if (students.isEmpty()) {
@@ -132,6 +192,6 @@ public class StudentService40 {
         return students;
     }
 
-    private StudentNotFoundException40 studentNotFoundById(int id) { throw new StudentNotFoundException40("There is no student with id: " + id);}
+    private StudentNotFoundException40 studentNotFoundById(int id) { return new StudentNotFoundException40("There is no student with id: " + id);}
 
 }

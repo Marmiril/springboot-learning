@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.angel.springbootlearning.exercises.exercise40.dto.ErrorResponse40;
 
@@ -16,22 +15,23 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestControllerAdvice(basePackages = "com.angel.springbootlearning.exercises.exercise40")
 public class GlobalExceptionHandler40 {
 
-    @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<ErrorResponse40> handleResponseStatusException(
-        ResponseStatusException exception,
+    @ExceptionHandler(InvalidStudentRequestException40.class)
+    public ResponseEntity<ErrorResponse40> handleInvalidStudentRequest(
+        InvalidStudentRequestException40  exception,
         HttpServletRequest request) {
-        int status = exception.getStatusCode().value();
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
 
         ErrorResponse40 response = new ErrorResponse40(
             LocalDateTime.now(ZoneId.of("Europe/Madrid")),
-            status,
-            HttpStatus.valueOf(status).getReasonPhrase(),
-            exception.getReason(),
+            status.value(),
+            status.getReasonPhrase(),
+            exception.getMessage(),
             request.getRequestURI()
         );
 
         return ResponseEntity
-            .status(exception.getStatusCode())
+            .status(status)
             .body(response);
     }   
     

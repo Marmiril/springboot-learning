@@ -1,5 +1,5 @@
 /*
- * Exercise 39 Bis - Advanced Layered CRUD
+ * Exercise 40 - Advanced Layered CRUD
  *
  * Purpose:
  * Manages the in-memory persistence of students.
@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.angel.springbootlearning.exercises.exercise40.model.Student40;
+import org.springframework.stereotype.Repository;
 
+import com.angel.springbootlearning.exercises.exercise40.model.Student40;
+@Repository
 public class StudentRepository40 {
         
     private final List<Student40> students = new ArrayList<>();

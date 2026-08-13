@@ -1,5 +1,5 @@
 /*
- * Exercise 39 Bis - Advanced Layered CRUD
+ * Exercise 40 - Advanced Layered CRUD
  *
  * Purpose:
  * Represents a student stored in the virtual database.
