@@ -12,6 +12,5 @@ public class InvalidStudentRequestException40 extends RuntimeException {
 
     public InvalidStudentRequestException40(String message) {
         super(message);
-    }
-    
+    }    
 }
