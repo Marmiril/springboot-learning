@@ -133,12 +133,7 @@ public class StudentService40 {
     }
 
 
-
-    /////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////////////////////
-
-
+    
     private void validateRequest(StudentRequest40 request) {
         if (request == null)  {
             throw new InvalidStudentRequestException40("Request fields are empty.");
