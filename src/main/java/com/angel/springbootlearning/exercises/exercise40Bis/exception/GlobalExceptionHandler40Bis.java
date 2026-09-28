@@ -19,11 +19,12 @@ public class GlobalExceptionHandler40Bis {
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
         ErrorResponse40Bis responde = new ErrorResponse40Bis(
-                LocalDateTime.now(ZoneId.of("Europe/Madrid")),
-                status.value(),
-                status.getReasonPhrase(),
-                exception.getMessage(),
-                request.getRequestURI());
+            LocalDateTime.now(ZoneId.of("Europe/Madrid")),
+            status.value(),
+            status.getReasonPhrase(),
+            exception.getMessage(),
+            request.getRequestURI()
+        );
 
         return ResponseEntity
                 .status(status)
