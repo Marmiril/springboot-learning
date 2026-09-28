@@ -2,6 +2,7 @@ package com.angel.springbootlearning.exercises.exercise40Bis.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,8 @@ public class StudentRepository40Bis {
         return student;
     }
     
+    public Optional<Student40Bis> findById(int id) { return students.stream().filter(student -> student.id() == id).findFirst(); 
+
+    
+    }
 }
