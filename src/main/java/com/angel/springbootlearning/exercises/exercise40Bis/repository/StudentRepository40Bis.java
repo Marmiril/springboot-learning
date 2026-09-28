@@ -34,5 +34,17 @@ public class StudentRepository40Bis {
         return Optional.empty();
     }
 
+    public Optional<Student40Bis> deleteById(int id) {
+        Optional<Student40Bis> student = findById(id);
+        student.ifPresent(students::remove);
+        return student;
+    }
+
+    public Optional<Student40Bis> deleteByName(String name) {
+        Optional<Student40Bis> student = findByName(name);
+        student.ifPresent(students::remove);
+        return student;
+    }
+
 }
 
