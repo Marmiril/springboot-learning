@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.angel.springbootlearning.exercises.exercise40Bis.Student40Bis;
+import com.angel.springbootlearning.exercises.exercise40Bis.model.Student40Bis;
 
 @Repository 
 public class StudentRepository40Bis {

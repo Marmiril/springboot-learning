@@ -1,4 +1,4 @@
-package com.angel.springbootlearning.exercises.exercise40Bis;
+package com.angel.springbootlearning.exercises.exercise40Bis.model;
 
 import java.time.LocalDateTime;
 
