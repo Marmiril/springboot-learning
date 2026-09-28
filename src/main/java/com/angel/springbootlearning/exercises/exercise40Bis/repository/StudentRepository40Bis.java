@@ -20,9 +20,11 @@ public class StudentRepository40Bis {
         return student;
     }
     
-    public Optional<Student40Bis> findById(int id) { return students.stream().filter(student -> student.id() == id).findFirst(); 
-
+    public Optional<Student40Bis> findById(int id) { return students.stream().filter(student -> student.id() == id).findFirst(); }
+    public Optional<Student40Bis> findByName(String name) { return students.stream().filter(student -> student.name().equalsIgnoreCase(name)).findFirst(); }
+    public List<Student40Bis> findByRole(String role) { return students.stream().filter(student -> student.role().equalsIgnoreCase(role)).toList(); }
     
+
     }
 }
 
