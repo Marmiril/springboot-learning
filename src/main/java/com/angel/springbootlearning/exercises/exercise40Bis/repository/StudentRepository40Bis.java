@@ -46,5 +46,11 @@ public class StudentRepository40Bis {
         return student;
     }
 
+    public List<Student40Bis> deleteByRole(String role) {
+        List<Student40Bis> studentsToDelete = findByRole(role);
+        students.removeAll(studentsToDelete);
+        return studentsToDelete;
+    }
+
 }
 
