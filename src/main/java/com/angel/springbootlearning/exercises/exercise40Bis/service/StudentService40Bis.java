@@ -40,8 +40,26 @@ public class StudentService40Bis {
 
         return studentRepository.create(student);
     }
+    public Student40Bis updateStudent(int id, StudentRequest40Bis request) {
+        Student40Bis student = requireStudentById(id);
 
-            ///////////////////////////////////////////////
+        validateRequest(request);
+        validateUniqueName(request.name(), id);
+
+        Student40Bis updatedStudent = new Student40Bis(
+            student.id(),
+            request.name(),
+            request.role(),
+            student.registrationDate()
+        );
+
+        return studentRepository
+            .update(updatedStudent)
+            .orElseThrow(() -> studentNotFoundById(id)
+        );
+    }
+           
+    ///////////////////////////////////////////////
     
     private Student40Bis requireStudentById(int id) {
         return studentRepository
