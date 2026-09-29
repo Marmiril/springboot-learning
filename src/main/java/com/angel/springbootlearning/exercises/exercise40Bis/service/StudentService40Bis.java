@@ -58,6 +58,47 @@ public class StudentService40Bis {
             .orElseThrow(() -> studentNotFoundById(id)
         );
     }
+    public Student40Bis patchStudent(int id, StudentRequest40Bis request)     {
+        Student40Bis student = requireStudentById(id);
+
+        validateRequest(request);
+
+        String patchedName = student.name();
+        String patchedRole = student.role();
+
+        if (request.name() != null) {
+            validateRequestField(request.name(), "Name");
+            validateUniqueName(request.name(), student.id());
+            patchedName = request.name().trim();
+        }
+
+        if (request.role() != null) {
+            validateRequestField(request.role(), "Role");
+            patchedRole = request.role();
+        }
+        
+        Student40Bis patchedStudent = new Student40Bis(
+            student.id(),
+            patchedName,
+            patchedRole,
+            student.registrationDate()
+        );
+
+        return studentRepository 
+            .update(patchedStudent)
+            .orElseThrow(() -> studentNotFoundById(id));
+    }
+    public Student40Bis deleteStudentById(int id) {
+        Student40Bis student = requireStudentById(id);
+        studentRepository.deleteById(id);
+        return student;
+    }
+    public Student40Bis deleteStudentByName(String name) {
+        validateRequestField(name, "Name");
+        Student40Bis student = requireStudentByName(name);
+        studentRepository.deleteByName(name);
+        return student;
+    }
            
     ///////////////////////////////////////////////
     
